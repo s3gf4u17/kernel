@@ -1,6 +1,7 @@
 #include <common/types.h>
 #include <gdt.h>
 #include <hardware/interrupts.h>
+#include <hardware/pci.h>
 #include <drivers/driver.h>
 #include <drivers/keyboard.h>
 #include <drivers/mouse.h>
@@ -53,7 +54,7 @@ extern "C" void callConstructors() {
 }
 
 extern "C" void kernelMain(void *multiboot_structure, uint32_t magic_number) {
-    printf("hello kernel.\nmy name is Simon and i am looking for a job as a kernel engineer :)\n");
+    printf("kernel booted successfuly\n");
     GlobalDescriptorTable gdt;
     InterruptManager interrupts(&gdt);
 
@@ -62,8 +63,13 @@ extern "C" void kernelMain(void *multiboot_structure, uint32_t magic_number) {
     drvManager.AddDriver(&keyboard);
     MouseDriver mouse(&interrupts);
     drvManager.AddDriver(&mouse);
+
+    PeripheralComponentInterconnectController PCI;
+    PCI.SelectDrivers(&drvManager);
+
     drvManager.ActivateAll();
 
     interrupts.Activate();
+    printf(">");
     while(1);
 }

@@ -9,6 +9,7 @@ objects = build/loader.o \
 	build/drivers/driver.o \
 	build/hardware/interruptstubs.o \
 	build/hardware/interrupts.o \
+	build/hardware/pci.o \
 	build/drivers/keyboard.o \
 	build/drivers/mouse.o \
 	build/kernel.o

@@ -4,6 +4,9 @@ Port::Port(uint16_t portnumber) {
     this->portnumber = portnumber;
 }
 
+Port::~Port() {
+}
+
 Port8Bit::Port8Bit(uint16_t portnumber) : Port(portnumber) {
 }
 
@@ -38,6 +41,9 @@ uint16_t Port16Bit::Read() {
 }
 
 Port32Bit::Port32Bit(uint16_t portnumber) : Port(portnumber) {
+}
+
+Port32Bit::~Port32Bit() {
 }
 
 void Port32Bit::Write(uint32_t data) {
